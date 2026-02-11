@@ -6,10 +6,9 @@
 #    By: dstreck <dstreck@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/27 18:36:41 by bavirgil          #+#    #+#              #
-#    Updated: 2026/02/11 16:30:44 by dstreck          ###   ########.fr        #
+#    Updated: 2026/02/11 16:39:14 by dstreck          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 #----------------------------------COMPILER------------------------------------#
 NAME		:= minishell
@@ -44,26 +43,31 @@ OBJS		:=	$(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 #---------------------------------COMPILATION----------------------------------#
 all:			$(NAME)
 
+# Compiles the LibFT
 $(LIBFT_LIB):
 	@printf "$(YELLOW)Compiling LibFT...$(WHITE)\n"
 	@$(MAKE) -C $(LIBFT_DIR)
 	@printf "$(GREEN)LibFT has been compiled successfully.$(WHITE)\n"
 
+# Creates a directory for all the object files
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
+# Compiles the object files into said directory
 $(OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c|	$(OBJS_DIR)
 	@printf "$(YE)Compiling $<...$(WH)\n"
 	@$(CC) $(CFLAGS) -I $(INCL_DIR) -c $< -o $@
 	@printf "$(GR)$< has been successfully compiled!$(WH)\n"
 
+# Compiles minishell object files
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+# Compiles minishell in its entirity
 $(NAME):		$(OBJ) $(LIBFT_LIB)
 	@printf "$(YE)Compiling $(NAME)...$(WH)\n"
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(INCLUDES) -o $(NAME) -lreadline
 	@printf "$(GR)$(NAME) has been successfully compiled!$(WH)\n"
-
-%.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	@make -C $(LIBFT_DIR) clean
@@ -79,6 +83,7 @@ re:			fclean all
 #-----------------------------------IGNORE-------------------------------------#
 .PHONY:		all clean fclean re bonus
 
+# Colours for terminal output (WHite, GReen, YEllow and REd)
 WH	=	\033[0m
 GR	=	\033[32;01m
 YE	=	\033[33;01m
