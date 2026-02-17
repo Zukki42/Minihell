@@ -6,7 +6,7 @@
 #    By: dstreck <dstreck@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/27 18:36:41 by bavirgil          #+#    #+#              #
-#    Updated: 2026/02/17 17:56:30 by dstreck          ###   ########.fr        #
+#    Updated: 2026/02/17 18:02:39 by dstreck          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ INCL_DIR	:= incl
 SRCS_DIR	:= srcs
 OBJS_DIR	:= objs
 O_PARSER	:= objs/parser
+O_EXECUT	:= objs/execution
+O_GARCOL	:= objs/garbage_collector
 #------------------------------------LIBFT-------------------------------------#
 LIBFT_DIR	:= $(INCL_DIR)/LibFT
 LIBFT_LIB	:= $(INCL_DIR)/LibFT/libft.a
@@ -54,6 +56,8 @@ $(LIBFT_LIB):
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(O_PARSER)
+	@mkdir -p $(O_EXECUT)
+	@mkdir -p $(O_GARCOL)
 
 # Compiles the object files into said directory
 $(OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c|	$(OBJS_DIR)
@@ -80,7 +84,7 @@ clean:
 fclean:			clean
 	@rm -f $(NAME)
 	@make -C $(LIBFT_DIR) fclean
-	@printf "(GR)All compiled files have been removed!$(WH)\n"
+	@printf "$(GR)All compiled files have been removed!$(WH)\n"
 
 re:			fclean all
 #-----------------------------------IGNORE-------------------------------------#
