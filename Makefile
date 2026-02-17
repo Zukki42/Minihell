@@ -6,7 +6,7 @@
 #    By: dstreck <dstreck@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/27 18:36:41 by bavirgil          #+#    #+#              #
-#    Updated: 2026/02/17 17:41:22 by dstreck          ###   ########.fr        #
+#    Updated: 2026/02/17 17:56:30 by dstreck          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,26 +18,27 @@ CFLAGS		:= -Wall -Wextra -Werror -g
 
 INCLUDES	:= -I./incl -ILibFT
 INCL_DIR	:= incl
-SRCs_DIR	:= srcs
+SRCS_DIR	:= srcs
 OBJS_DIR	:= objs
+O_PARSER	:= objs/parser
 #------------------------------------LIBFT-------------------------------------#
 LIBFT_DIR	:= $(INCL_DIR)/LibFT
 LIBFT_LIB	:= $(INCL_DIR)/LibFT/libft.a
 #------------------------OBJECT DEPENDENCY COMPILATION-------------------------#
-SRC			=	$(SRC_DIR)/main.c \
-				$(SRC_DIR)/loop.c \
-				$(SRC_DIR)/parser/parse_line.c \
-				$(SRC_DIR)/parser/parse_free.c \
-				$(SRC_DIR)/parser/parse_utils.c \
-				$(SRC_DIR)/parser/parse_syntax.c \
-				$(SRC_DIR)/parser/parse_cmd.c \
-				$(SRC_DIR)/parser/parse_redir.c \
-				$(SRC_DIR)/parser/parse_debug.c \
-				$(SRC_DIR)/parser/expand.c \
-				$(SRC_DIR)/parser/expand_env.c \
-				$(SRC_DIR)/parser/lexer.c \
-				$(SRC_DIR)/parser/lexer_utils.c \
-				$(SRC_DIR)/parser/lexer_quotes.c \
+SRCS		=	$(SRCS_DIR)/main.c \
+				$(SRCS_DIR)/loop.c \
+				$(SRCS_DIR)/parser/parse_line.c \
+				$(SRCS_DIR)/parser/parse_free.c \
+				$(SRCS_DIR)/parser/parse_utils.c \
+				$(SRCS_DIR)/parser/parse_syntax.c \
+				$(SRCS_DIR)/parser/parse_cmd.c \
+				$(SRCS_DIR)/parser/parse_redir.c \
+				$(SRCS_DIR)/parser/parse_debug.c \
+				$(SRCS_DIR)/parser/expand.c \
+				$(SRCS_DIR)/parser/expand_env.c \
+				$(SRCS_DIR)/parser/lexer.c \
+				$(SRCS_DIR)/parser/lexer_utils.c \
+				$(SRCS_DIR)/parser/lexer_quotes.c \
 
 OBJS		:=	$(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 #---------------------------------COMPILATION----------------------------------#
@@ -52,6 +53,7 @@ $(LIBFT_LIB):
 # Creates a directory for all the object files
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(O_PARSER)
 
 # Compiles the object files into said directory
 $(OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c|	$(OBJS_DIR)
@@ -64,14 +66,15 @@ $(OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c|	$(OBJS_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 # Compiles minishell in its entirity
-$(NAME):		$(OBJ) $(LIBFT_LIB)
+$(NAME):		$(OBJS) $(LIBFT_LIB)
 	@printf "$(YE)Compiling $(NAME)...$(WH)\n"
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(INCLUDES) -o $(NAME) -lreadline
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(INCLUDES) -o $(NAME) -lreadline
 	@printf "$(GR)$(NAME) has been successfully compiled!$(WH)\n"
 
 clean:
 	@make -C $(LIBFT_DIR) clean
-	@rm -f $(OBJ)
+	@rm -f $(OBJS)
+	@rm -rf $(OBJS_DIR)
 	@printf "$(GR)All LibFT and Minishell .o files have been removed!$(WH)\n"
 
 fclean:			clean
