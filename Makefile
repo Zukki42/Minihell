@@ -6,7 +6,7 @@
 #    By: dstreck <dstreck@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/27 18:36:41 by bavirgil          #+#    #+#              #
-#    Updated: 2026/02/11 16:39:14 by dstreck          ###   ########.fr        #
+#    Updated: 2026/02/17 17:41:22 by dstreck          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME		:= minishell
 CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror -g
 
-INCLUDES	:= -IIncludes -ILibFT
+INCLUDES	:= -I./incl -ILibFT
 INCL_DIR	:= incl
 SRCs_DIR	:= srcs
 OBJS_DIR	:= objs
