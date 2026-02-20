@@ -6,7 +6,7 @@
 #    By: dstreck <dstreck@student.42heilbronn.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/27 18:36:41 by bavirgil          #+#    #+#              #
-#    Updated: 2026/02/17 18:02:39 by dstreck          ###   ########.fr        #
+#    Updated: 2026/02/20 18:01:13 by dstreck          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,12 @@ $(OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c|	$(OBJS_DIR)
 $(NAME):		$(OBJS) $(LIBFT_LIB)
 	@printf "$(YE)Compiling $(NAME)...$(WH)\n"
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(INCLUDES) -o $(NAME) -lreadline
+	@printf "$(RE)   _____  .__       .__  _________.__           .__  .____      \n"
+	@printf "$(RE)  /     \ |__| ____ |__|/   _____/|  |__   ____ |  | |    |     \n"
+	@printf "$(RE) /  \ /  \|  |/    \|  |\_____  \ |  |  \_/ __ \|  | |    |     \n"
+	@printf "$(RE)/    Y    \  |   |  \  |/        \|   Y  \  ___/|  |_|    |___  \n"
+	@printf "$(RE)\____|__  /__|___|  /__/_______  /|___|  /\___  >____/_______ \ \n"
+	@printf "$(RE)        \/        \/           \/      \/     \/             \/ \n"
 	@printf "$(GR)$(NAME) has been successfully compiled!$(WH)\n"
 
 clean:
